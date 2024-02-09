@@ -11,6 +11,7 @@ interface NewNoteCardProps {
 export function NewNoteCard({ onNoteCreated }: NewNoteCardProps){
 
   const [shouldShowOnboarding, setShouldShowOnboarding] = useState(true)
+  const [isRecording, setIsRecording] = useState(false)
   const [content, setContent] = useState('')
 
 
@@ -18,6 +19,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps){
 
    setShouldShowOnboarding(false)
   }
+
   function handleContentChanged(event: ChangeEvent<HTMLTextAreaElement>){
 
     setContent(event.target.value)
@@ -38,6 +40,12 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps){
 
     toast.success('Nota criada com sucesso!')
     
+  }
+
+  function handleStartRecording(){
+
+    setIsRecording(true)
+
   }
     return(
       <Dialog.Root>
@@ -66,7 +74,7 @@ export function NewNoteCard({ onNoteCreated }: NewNoteCardProps){
                   </span>
                 
                   {shouldShowOnboarding ? (
-                    <p className='text-sm leading-6 text-slate-400'>Comece <button className='font-medium text-lime-400 hover:underline'>
+                    <p className='text-sm leading-6 text-slate-400'>Comece <button onClick={handleStartRecording} className='font-medium text-lime-400 hover:underline'>
                       gravando uma nota </button> em audio ou se preferir <button onClick={handleStartEditor} className='font-medium text-lime-400 hover:underline'> utilize apenas texto</button>.
                     </p> 
                   ):(
